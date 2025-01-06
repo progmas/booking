@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
-    @events = @user.events
-    @tickets = @user.tickets
+    @created_events = @user.events
+    @booked_tickets = @user.tickets.includes(:event)
   end
 end
