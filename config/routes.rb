@@ -16,5 +16,8 @@ Rails.application.routes.draw do
   get 'profile', to: 'users#show'
   resources :events do
     resources :tickets, only: [:new, :create]
+    collection do
+      get :past
+    end
   end
 end

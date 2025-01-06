@@ -8,8 +8,8 @@ class Event < ApplicationRecord
   validates :date, presence: true
   validates :total_tickets, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  scope :upcoming, -> { where('date >= ?', Time.current) }
-  scope :past, -> { where('date < ?', Time.current) }
+  scope :upcoming, -> { where('date >= ?', Time.current).order(date: :asc) }
+  scope :past, -> { where('date < ?', Time.current).order(date: :desc)  }
 
   before_validation :set_default_total_tickets, on: :create
 

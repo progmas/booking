@@ -1,0 +1,18 @@
+<h1>Past Events</h1>
+
+<% if @events.any? %>
+  <div class="events-list">
+    <% @events.each do |event| %>
+      <div class="event-card">
+        <h2><%= link_to event.name, event_path(event) %></h2>
+        <p><strong>Description:</strong> <%= event.description %></p>
+        <p><strong>Location:</strong> <%= event.location %></p>
+        <p><strong>Date:</strong> <%= event.date.strftime("%B %d, %Y at %I:%M %p") %></p>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No past events found.</p>
+<% end %>
+
+<%= link_to 'Back to Upcoming Events', events_path, class: 'btn btn-secondary' %>
