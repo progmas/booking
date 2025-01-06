@@ -13,6 +13,9 @@ class Event < ApplicationRecord
 
   before_validation :set_default_total_tickets, on: :create
 
+  # The lock_version column is used for optimistic locking
+  lock_optimistically
+
   def tickets_sold
     tickets.sum(:quantity)
   end
