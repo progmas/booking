@@ -25,6 +25,13 @@ class Event < ApplicationRecord
     total_tickets - tickets.sum(:quantity)
   end
 
+  # Caches the number of remaining tickets
+  def cached_tickets_available
+    Rails.cache.fetch("#{cache_key}/tickets_available", expires_in: 5.minutes) do
+      tickets_available
+    end
+  end
+
   # Checks if there are enough tickets
   def enough_tickets?(quantity)
     tickets_available >= quantity

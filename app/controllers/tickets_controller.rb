@@ -13,6 +13,7 @@ class TicketsController < ApplicationController
       @ticket = current_user.tickets.new(event: @event, quantity: quantity)
 
       if @ticket.save
+        Rails.cache.delete("#{@event.cache_key}/tickets_available")
         redirect_to @event, notice: 'Tickets booked successfully!'
       else
         redirect_to @event, alert: 'Failed to book tickets.'
