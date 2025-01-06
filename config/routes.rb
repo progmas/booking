@@ -20,4 +20,12 @@ Rails.application.routes.draw do
       get :past
     end
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :events, only: [:index, :show] do
+        resources :tickets, only: [:create]
+      end
+    end
+  end
 end
