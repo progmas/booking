@@ -17,8 +17,14 @@ class Event < ApplicationRecord
     tickets.sum(:quantity)
   end
 
+  # Calculates the number of tickets remaining
   def tickets_available
-    total_tickets - tickets_sold
+    total_tickets - tickets.sum(:quantity)
+  end
+
+  # Checks if there are enough tickets
+  def enough_tickets?(quantity)
+    tickets_available >= quantity
   end
 
   private

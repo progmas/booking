@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   devise_for :users
   get 'profile', to: 'users#show'
-  resources :events
-  resources :tickets, only: [:create]
+  resources :events do
+    resources :tickets, only: [:create]
+  end
 end
