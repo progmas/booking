@@ -12,7 +12,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  devise_for :users
   get 'profile', to: 'users#show'
   resources :events
-  devise_for :users
+  resources :tickets, only: [:create]
 end
