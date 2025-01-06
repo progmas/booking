@@ -1,7 +1,7 @@
 <h1><%= @event.name %></h1>
 <p><%= @event.description %></p>
 <p><strong>Location:</strong> <%= @event.location %></p>
-<p><strong>Date:</strong> <%= @event.date %></p>
+<p><strong>Date:</strong> <%= @event.date.strftime("%B %d, %Y at %I:%M %p") %></p>
 <p><strong>Tickets Available:</strong> <%= @event.tickets_available %></p>
 
 <% if user_signed_in? %>
@@ -9,12 +9,12 @@
   <%= form_with model: [@event, @ticket], url: event_tickets_path(@event), method: :post do |f| %>
     <div>
       <%= f.label :quantity, "Number of Tickets" %>
-      <%= f.number_field :quantity, min: 1, max: @event.tickets_available %>
+      <%= f.number_field :quantity, min: 1, max: @event.tickets_available, value: 1 %>
     </div>
-    <%= f.submit "Book Tickets" %>
+    <%= f.submit "Book Tickets", class: 'btn btn-primary' %>
   <% end %>
 <% else %>
   <p><%= link_to "Sign in", new_user_session_path %> to book tickets.</p>
 <% end %>
 
-<%= link_to 'Back to Events', events_path %>
+<%= link_to 'Back to Events', events_path, class: 'btn btn-secondary' %>
