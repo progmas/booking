@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   devise_for :users
   get 'profile', to: 'users#show'
-  resources :events do
+  resources :events, except: [:destroy] do
     resources :tickets, only: [:new, :create]
     collection do
       get :past
